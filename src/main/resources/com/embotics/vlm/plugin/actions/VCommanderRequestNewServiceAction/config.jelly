@@ -1,0 +1,62 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+	<j:set var="buildStepId" value="${h.generateId()}" />
+
+	<f:entry title="${%serviceName}" field="serviceName" description="${%serviceNameDesc}">
+    	<f:textbox id="serviceName-${buildStepId}"/>
+	</f:entry>
+	
+	<f:entry>
+		<button type="button" onclick="getPayload_${buildStepId}()">
+			<img src="${h.resourcePath}/images/16x16/search.png" />
+			${%lookup}
+		</button>
+    	<label id="lookup-${buildStepId}" style="margin-left:10px" />
+	</f:entry>
+
+    <f:entry title="${%payload}" field="payload" description="See &lt;a href='${rootURL}/env-vars.html' target=_new&gt;the list of available environment variables&lt;/a&gt;">
+        <f:textarea id="payload-${buildStepId}" style="min-height:240px" />
+    </f:entry>
+    
+    <f:entry title="${%sync}" field="sync">
+        <f:checkbox default="true" id="sync-${buildStepId}" onclick="updateWaitControls_${buildStepId}()" />
+    </f:entry>
+    
+    <f:entry title="${%timeout}" field="timeout">
+        <f:number default="10" id="timeout-${buildStepId}" />
+    </f:entry>
+    
+    <f:entry title="${%polling}" field="polling">
+        <f:number default="15" id="polling-${buildStepId}" />
+    </f:entry>
+
+	<script>
+		function getPayload_${buildStepId}() {
+			var serviceName = document.getElementById("serviceName-${buildStepId}").value;
+			var dscrptr = <st:bind value="${descriptor}"/>;
+			
+			document.getElementById("lookup-${buildStepId}").innerHTML="Connecting ...";
+			dscrptr.getPayload(serviceName, function(t) {
+				document.getElementById("payload-${buildStepId}").value = t.responseObject();
+				document.getElementById("lookup-${buildStepId}").innerHTML="";
+				
+				if ("createEvent" in document) {
+				    var evt = document.createEvent("HTMLEvents");
+				    evt.initEvent("change", false, true);
+				    document.getElementById("payload-${buildStepId}").dispatchEvent(evt);
+				}
+				else
+				    document.getElementById("payload-${buildStepId}").fireEvent("onchange");
+			})
+		}
+		
+		function updateWaitControls_${buildStepId}() {
+			var sync = document.getElementById("sync-${buildStepId}").checked;
+			document.getElementById("timeout-${buildStepId}").parentElement.parentElement.style.display=sync ? null : "none"
+			document.getElementById("polling-${buildStepId}").parentElement.parentElement.style.display=sync ? null : "none"
+		}
+		setTimeout(updateWaitControls_${buildStepId}, 100);
+	</script>
+	
+</j:jelly>

@@ -1,0 +1,39 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+	<j:set var="buildStepId" value="${h.generateId()}" />
+
+	<f:entry title="${%targetType}" field="targetType">
+	   <f:combobox />
+	</f:entry>
+
+    <f:entry title="${%targetName}" field="targetName" description="See &lt;a href='${rootURL}/env-vars.html' target=_new&gt;the list of available environment variables&lt;/a&gt;">
+        <f:textbox />
+    </f:entry>
+
+    <f:entry title="${%workflowName}" field="workflowName">
+        <f:textbox />
+    </f:entry>
+    
+    <f:entry title="${%sync}" field="sync">
+        <f:checkbox default="true" id="sync-${buildStepId}" onclick="updateWaitControls_${buildStepId}()" />
+    </f:entry>
+    
+    <f:entry title="${%timeout}" field="timeout">
+        <f:number default="10" id="timeout-${buildStepId}" />
+    </f:entry>
+    
+    <f:entry title="${%polling}" field="polling">
+        <f:number default="15" id="polling-${buildStepId}" />
+    </f:entry>
+	
+	<script>
+		function updateWaitControls_${buildStepId}() {
+			var sync = document.getElementById("sync-${buildStepId}").checked;
+			document.getElementById("timeout-${buildStepId}").parentElement.parentElement.style.display=sync ? null : "none"
+			document.getElementById("polling-${buildStepId}").parentElement.parentElement.style.display=sync ? null : "none"
+		}
+		setTimeout(updateWaitControls_${buildStepId}, 100);
+	</script>
+	
+</j:jelly>

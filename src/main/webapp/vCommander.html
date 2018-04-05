@@ -1,0 +1,79 @@
+<div>
+	<h3>This plug-in enables Jenkins to interact with Embotics vCommander.</h3>
+	<div>
+		<b>It provides the following build steps:</b>
+		<div style="margin-left: 40px;">
+			Request New Service<br/>
+			Wait For Service Request Completion<br/>
+			Run Command Workflow<br/>
+			Wait For Command Workflow Completion<br/>
+		</div>
+	</div>
+
+
+	<br/>
+	<div>
+		<b>Request New Service</b> build step enables Jenkins to request a service from Embotics vCommander.<br/>
+		To request a service (for example, a VM), enter the name of a preconfigured vCommander service and look it up. If the service is found, it's returned as a JSON payload. You may adjust the configuration parameters of the payload as required. You may also modify the default timeout and polling intervals before making the service request.<br/>
+		<br/>
+		This action can be executed synchronously or asynchronously.<br/>
+		If asynchronously execution is configured, a following wait build step can check the results of this step.<br/>
+		<br/>
+		After the request is made, the following environment variables are created:
+		<div style="margin-left: 40px;">
+			VCOMMANDER_REQUESTED_SERVICE_ID - the request ID<br/>
+		</div>
+		<br/>
+		For a synchronous execution, the build log will provide details about the service request. If the request is successful, the following environment variables are created:
+		<div style="margin-left: 40px;">
+			VCOMMANDER_REQUESTED_SERVICEx_COMPONENTy_NAME - The deployed component name, where x is the service index and y is the component index.<br/>
+			VCOMMANDER_REQUESTED_SERVICEx_COMPONENTy_TYPE - The deployed component type, where x is the service index and y is the component index.<br/>
+			Indexes start from 1.<br/>
+		</div>
+	</div>
+
+
+	<br/>
+	<div>
+		<b>Wait For Service Request Completion</b> build step enables Jenkins to wait for the completion of an asynchronously-called vCommander Request.<br/>
+		The environment variable VCOMMANDER_REQUESTED_SERVICE_ID created by that service request step can be used as input parameter for this wait build step.<br/>
+		<br/>
+		The build log will provide details about the service request. If the request is successful, the following environment variables are created:
+		<div style="margin-left: 40px;">
+			VCOMMANDER_REQUESTED_SERVICEx_COMPONENTy_NAME - The deployed component name, where x is the service index and y is the component index.<br/>
+			VCOMMANDER_REQUESTED_SERVICEx_COMPONENTy_TYPE - The deployed component type, where x is the service index and y is the component index.<br/>
+			Indexes start from 1.<br/>
+		</div>
+	</div>
+
+
+	<br/>
+	<div>
+		<b>Run Command Workflow</b> build step enables Jenkins to run a command workflow in vCommander.<br/>
+		To run a command workflow, enter the name of the workflow and target.<br/>
+		<br/>
+		This action can be executed synchronously or asynchronously.<br/>
+		If asynchronously execution is configured, a following wait build step can check the results of this step.<br/>
+		<br/>
+		After the workflow request is made, the following environment variables are created:
+		<div style="margin-left: 40px;">
+			VCOMMANDER_WORKFLOW_TASK_ID - the task ID running the workflow
+		</div>
+		<br/>
+		For a synchronously execution, the build log will provide details about the command workflow.
+	</div>
+	
+
+	<br/>
+	<div>
+		<b>Wait For Command Workflow Completion</b> build step enables Jenkins to wait for previous asynchronously called vCommander Run Command Workflow completion.<br/>
+		The environment variable VCOMMANDER_WORKFLOW_TASK_ID created by the previous step can be used as input parameter for this build step.<br/>
+		<br/>
+		The build log will provide details about the command workflow.
+	</div>
+	
+
+	<br/>
+	<br/>
+	All the created environment variables can be used in subsequent build steps within the same project.
+</div>
