@@ -41,12 +41,12 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class ServiceRequestsClient {
 	private static final String SERVICES_PATH 					= "services";
-	private static final String SERVICE_REQUESTS_PATH 			= "servicerequests";
+	private static final String SERVICE_REQUESTS_PATH 			= "service-requests";
 	private static final String SERVICE_REQUEST_COMMENTS_PATH 	= "comments";
 
 
 	private static final String PUBLISHED_SERVICE_NAME = "name";
-	private static final String PUBLISHED_SERVICE_FORM = "requestform";
+	private static final String PUBLISHED_SERVICE_FORM = "request-form";
 	private static final String PUBLISHED_SERVICE_ID = "id";
 	private static final String PUBLISHED_SERVICE_FORM_SERVICE_ID = "service_id";
 
