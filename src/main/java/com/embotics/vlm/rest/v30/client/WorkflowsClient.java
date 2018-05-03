@@ -38,7 +38,7 @@ import com.sun.jersey.api.client.WebResource;
  *
  */
 public class WorkflowsClient {
-	private static final String WORKFLOW_DEFINITIONS_PATH 		= "workflowdefinitions";
+	private static final String WORKFLOW_DEFINITIONS_PATH 		= "workflow-definitions";
 	private static final String TASKS_PATH 						= "tasks";
 	private static final String WORKFLOWS_PATH 					= "workflows";
 	private static final String WORKFLOW_COMMENTS_PATH 			= "comments";
