@@ -9,7 +9,7 @@
     </parent>
     
     <artifactId>embotics-vcommander</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
     
     <packaging>hpi</packaging>
     <properties>
@@ -35,6 +35,11 @@
 			<artifactId>credentials</artifactId>
 			<version>1.18</version>
 		</dependency>
+	    <dependency>
+	      <groupId>org.jenkins-ci.plugins</groupId>
+	      <artifactId>structs</artifactId>
+	      <version>1.7</version>
+	    </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
