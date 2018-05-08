@@ -16,6 +16,7 @@ import java.net.ConnectException;
 import java.util.Collections;
 import java.util.List;
 
+import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
@@ -73,6 +74,7 @@ public class VCommanderBuilder extends Builder implements SimpleBuildStep {
 	}
 
 	@Extension
+	@Symbol("vCommander")
 	public static final class VCommanderBuilderDescriptor extends BuildStepDescriptor<Builder> {
 		
         @Override
