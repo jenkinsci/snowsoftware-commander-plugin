@@ -7,7 +7,7 @@
         <version>2.33</version>
         <relativePath />
     </parent>
-    
+    <groupId>io.jenkins.plugins</groupId> 
     <artifactId>embotics-vcommander</artifactId>
     <version>1.2</version>
     
