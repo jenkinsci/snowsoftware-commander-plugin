@@ -16,4 +16,3 @@ https://www.embotics.com/
 embotics.com  
 Multi-Cloud Management Platform | Embotics vCommander  
 Try Embotics vCommander Multi-Cloud Management Platform for faster provisioning, orchestration, self-service, governance, & cost optimization today.  
-
