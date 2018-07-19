@@ -14,10 +14,11 @@ public enum WorkflowTargetType {
     DB_INSTANCE,
     LOAD_BALANCER,
     AUTO_SCALING_GROUP,
-    MANAGEMENTSERVER;
+    MANAGEMENTSERVER,
+    NO_INVENTORY_TARGET;
 
-	// we cannot add the "ALL" to the enum, since this enum is for a concrete target
-	// the "ALL" is required to validate this target type against a workflow definition which is compatible with ALL types
-	public static final String WORKFLOW_TYPE_FOR_ALL = "ALL";
+	// we cannot add the "ANY_INVENTORY_TYPE" to the enum, since this enum is for a concrete target
+	// the "ANY_INVENTORY_TYPE" is required to validate this target type against a workflow definition which is compatible with ANY_INVENTORY_TYPE types
+	public static final String WORKFLOW_TYPE_FOR_ANY_INVENTORY_TYPE = "ANY_INVENTORY_TYPE";
 
 }

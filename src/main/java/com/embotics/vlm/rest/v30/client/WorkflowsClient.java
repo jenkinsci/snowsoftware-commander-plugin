@@ -27,6 +27,7 @@ import org.codehaus.jettison.json.JSONObject;
 
 import com.embotics.vlm.rest.v30.client.model.Comment;
 import com.embotics.vlm.rest.v30.client.model.VCommanderException;
+import com.embotics.vlm.rest.v30.client.model.WorkflowTargetType;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.ClientResponse.Status;
 import com.sun.jersey.api.client.WebResource;
@@ -51,7 +52,8 @@ public class WorkflowsClient {
 	private static final String WORKFLOW_DEFINITION_RUN_ASYNC = "async";
 	
 	private static final String WORKFLOW_DEFINITION_TYPE_COMMAND = "COMMAND";
-	private static final String WORKFLOW_DEFINITION_RUN_REQUEST_BODY_FORMAT = "{\"target_name\":\"%s\",\"target_type\":\"%s\"}";
+	private static final String WORKFLOW_DEFINITION_RUN_REQUEST_BODY_FORMAT_WITH_TARGET = "{\"target_name\":\"%s\",\"target_type\":\"%s\"}";
+	private static final String WORKFLOW_DEFINITION_RUN_REQUEST_BODY_FORMAT = "{\"target_name\":null,\"target_type\":\"%s\"}";
 	
 	private static final String TASK_RELATED_OBJECTS = "related_objects";
 	private static final String TASK_ID = "id";
@@ -155,8 +157,7 @@ public class WorkflowsClient {
 	/**
 	 * Run a Command Workflow in vCommander.
 	 * This call will create a task in vCommander, which will be scheduled based on the queue.
-	 * If the task will not start quickly, a task object is returned, and user should query the task for updates.
-	 * If the task will start quickly, the workflow reference will be returned, and user should query the workflow for updates.
+	 * A task ID is returned, and user should query the task for updates.
 	 * 
 	 * @param workflowId			The ID of the workflow definition
 	 * @param targetType			The type of the target
@@ -168,20 +169,38 @@ public class WorkflowsClient {
 	 * @throws VCommanderException 	If something goes wrong
 	 */
 	public String runCommandWorkflow(Long workflowId, String targetType, String targetName) throws JSONException, VCommanderException {
-		if (StringUtils.isBlank(targetName)) {
-			throw new VCommanderException("No targetName provided.");
-		}
-		
+
+		// validate target type
 		if (StringUtils.isBlank(targetType)) {
 			throw new VCommanderException("No targetType provided.");
 		}
 		
+		// validate target name
+		// for workflows without target
+		if(WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(targetType)) {
+			// name cannot be specified
+			if (StringUtils.isNotBlank(targetName)) {
+				throw new VCommanderException("When targetType is NO_INVENTORY_TARGET, then targetName must be null: " + targetName);
+			}
+			
+		// for workflows with target
+		} else {
+			// name must be specified
+			if (StringUtils.isBlank(targetName)) {
+				throw new VCommanderException("No targetName provided.");
+			}	
+		}
+
+		// validate workflow ID
 		if (workflowId == null) {
 			throw new VCommanderException("No workflowId provided.");
 		}
 
 		// running the workflow
-		String requestBody = String.format(WORKFLOW_DEFINITION_RUN_REQUEST_BODY_FORMAT, targetName, targetType);
+		String requestBody = WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(targetType) 
+								? String.format(WORKFLOW_DEFINITION_RUN_REQUEST_BODY_FORMAT, targetType)
+								: String.format(WORKFLOW_DEFINITION_RUN_REQUEST_BODY_FORMAT_WITH_TARGET, targetName, targetType);
+								
 		ClientResponse runCommandResponse = webResource.path(WORKFLOW_DEFINITIONS_PATH).path(workflowId.toString()).path(WORKFLOW_DEFINITION_RUN).queryParam(WORKFLOW_DEFINITION_RUN_ASYNC, "true").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, requestBody);
 		ClientUtils.checkResponse(runCommandResponse, Status.ACCEPTED.getStatusCode());
 

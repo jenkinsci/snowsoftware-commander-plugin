@@ -154,7 +154,7 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 		// form validations
 	
 		/**
-		 * Called by jelly, to validate workflowName field
+		 * Called by jelly, to validate targetType field
 		 */
 		public FormValidation doCheckTargetType(@QueryParameter String targetType) throws IOException, ServletException {
 			// if no content, do not return error;
@@ -165,6 +165,23 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 
 			if(!PluginUtils.hasVariable(targetType) && !isTargetTypeValid(targetType)) {
 				return FormValidation.error(Messages.VCommanderRunWorkflowAction_errors_targetTypeInvalid(targetType));
+			}
+			
+			return FormValidation.ok();
+		}
+		
+		/**
+		 * Called by jelly, to validate targetName field
+		 */
+		public FormValidation doCheckTargetName(@QueryParameter String targetType, @QueryParameter String targetName) throws IOException, ServletException {
+			// if no content, do not return error;
+			// we do not want to show the initial form with error
+			if (StringUtils.isBlank(targetName)) {
+				return FormValidation.ok();
+			}
+
+			if(WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(targetType) && StringUtils.isNotBlank(targetName)) {
+				return FormValidation.error(Messages.VCommanderRunWorkflowAction_errors_targetNameInvalid(targetType));
 			}
 			
 			return FormValidation.ok();
@@ -195,9 +212,26 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 				
 				try {
 					String workflowTargetType = client.getWorkflowDefinitionTargetType(workflowDefinitionId);
-					if(StringUtils.isBlank(targetType) || !PluginUtils.hasVariable(targetType) && (!isTargetTypeValid(targetType) || !WorkflowTargetType.WORKFLOW_TYPE_FOR_ALL.equals(workflowTargetType) && !targetType.equals(workflowTargetType))) {
-						String displayWorkflowTargetType = WorkflowTargetType.WORKFLOW_TYPE_FOR_ALL.equals(workflowTargetType) ? Messages.VCommanderRunWorkflowAction_targetType_ALL() : workflowTargetType;
-						return FormValidation.error(Messages.VCommanderRunWorkflowAction_errors_targetTypeDoNotMatch(targetType, displayWorkflowTargetType));
+					
+					// for workflows without target
+					if(WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(workflowTargetType)) {
+						// target type must be the no target value
+						if(!workflowTargetType.equals(targetType)) {
+							return FormValidation.error(Messages.VCommanderRunWorkflowAction_errors_targetTypeDoNotMatch(targetType, workflowTargetType));
+						}
+						
+					// for workflows with target
+					} else {
+						// when target type is defined and known (not variable), then it should be compatible with the workflow 
+						if(StringUtils.isBlank(targetType) 
+								|| !PluginUtils.hasVariable(targetType) && (
+									!isTargetTypeValid(targetType) 
+									|| WorkflowTargetType.WORKFLOW_TYPE_FOR_ANY_INVENTORY_TYPE.equals(workflowTargetType) && WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(targetType) 
+									|| !WorkflowTargetType.WORKFLOW_TYPE_FOR_ANY_INVENTORY_TYPE.equals(workflowTargetType) && !targetType.equals(workflowTargetType)
+								)) {
+							String displayWorkflowTargetType = WorkflowTargetType.WORKFLOW_TYPE_FOR_ANY_INVENTORY_TYPE.equals(workflowTargetType) ? Messages.VCommanderRunWorkflowAction_targetType_ALL() : workflowTargetType;
+							return FormValidation.error(Messages.VCommanderRunWorkflowAction_errors_targetTypeDoNotMatch(targetType, displayWorkflowTargetType));
+						}	
 					}
 				} catch (Exception e) {
 					return FormValidation.error(e.getMessage());
