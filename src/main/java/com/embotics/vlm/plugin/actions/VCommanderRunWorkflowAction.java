@@ -213,13 +213,23 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 				try {
 					String workflowTargetType = client.getWorkflowDefinitionTargetType(workflowDefinitionId);
 					
+					// for workflows without target
 					if(WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(workflowTargetType)) {
+						// target type must be the no target value
 						if(!workflowTargetType.equals(targetType)) {
 							return FormValidation.error(Messages.VCommanderRunWorkflowAction_errors_targetTypeDoNotMatch(targetType, workflowTargetType));
 						}
+						
+					// for workflows with target
 					} else {
-						if(StringUtils.isBlank(targetType) || !PluginUtils.hasVariable(targetType) && (!isTargetTypeValid(targetType) || WorkflowTargetType.WORKFLOW_TYPE_FOR_ALL.equals(workflowTargetType) && WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(targetType) || !WorkflowTargetType.WORKFLOW_TYPE_FOR_ALL.equals(workflowTargetType) && !targetType.equals(workflowTargetType))) {
-							String displayWorkflowTargetType = WorkflowTargetType.WORKFLOW_TYPE_FOR_ALL.equals(workflowTargetType) ? Messages.VCommanderRunWorkflowAction_targetType_ALL() : workflowTargetType;
+						// when target type is defined and known (not variable), then it should be compatible with the workflow 
+						if(StringUtils.isBlank(targetType) 
+								|| !PluginUtils.hasVariable(targetType) && (
+									!isTargetTypeValid(targetType) 
+									|| WorkflowTargetType.WORKFLOW_TYPE_FOR_ANY_INVENTORY_TYPE.equals(workflowTargetType) && WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(targetType) 
+									|| !WorkflowTargetType.WORKFLOW_TYPE_FOR_ANY_INVENTORY_TYPE.equals(workflowTargetType) && !targetType.equals(workflowTargetType)
+								)) {
+							String displayWorkflowTargetType = WorkflowTargetType.WORKFLOW_TYPE_FOR_ANY_INVENTORY_TYPE.equals(workflowTargetType) ? Messages.VCommanderRunWorkflowAction_targetType_ALL() : workflowTargetType;
 							return FormValidation.error(Messages.VCommanderRunWorkflowAction_errors_targetTypeDoNotMatch(targetType, displayWorkflowTargetType));
 						}	
 					}

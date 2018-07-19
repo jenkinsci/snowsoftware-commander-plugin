@@ -176,11 +176,16 @@ public class WorkflowsClient {
 		}
 		
 		// validate target name
+		// for workflows without target
 		if(WorkflowTargetType.NO_INVENTORY_TARGET.name().equals(targetType)) {
+			// name cannot be specified
 			if (StringUtils.isNotBlank(targetName)) {
 				throw new VCommanderException("When targetType is NO_INVENTORY_TARGET, then targetName must be null: " + targetName);
 			}
+			
+		// for workflows with target
 		} else {
+			// name must be specified
 			if (StringUtils.isBlank(targetName)) {
 				throw new VCommanderException("No targetName provided.");
 			}	
