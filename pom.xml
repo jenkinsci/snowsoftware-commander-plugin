@@ -9,7 +9,7 @@
     </parent>
     <groupId>io.jenkins.plugins</groupId> 
     <artifactId>embotics-vcommander</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.6-SNAPSHOT</version>
     
     <packaging>hpi</packaging>
     <properties>
