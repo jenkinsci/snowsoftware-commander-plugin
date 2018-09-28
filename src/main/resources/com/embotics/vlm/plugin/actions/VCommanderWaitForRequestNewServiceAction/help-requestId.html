@@ -1,5 +1,5 @@
 <div>
-	If you want the build job to wait for the completion of a service request, enter the service request's ID. Typically the wait will be for an asynchronous request made earlier in the same build. In that case, the build step will generate the environment variable COMMANDER_REQUESTED_SERVICE_ID, which can be used here.
+	If you want the build job to wait for the completion of a service request, enter the service request's ID. Typically the wait will be for an asynchronous request made earlier in the same build. In that case, the build step will generate the environment variable VCOMMANDER_REQUESTED_SERVICE_ID, which can be used here.
 	<br/>
 	<br/>
 	You may also use environment variables in the text. Regular Jenkins syntax will be used to resolve the variables - either $xyz, ${xyz} or ${a.b} but not $a.b, while ignoring "$".
