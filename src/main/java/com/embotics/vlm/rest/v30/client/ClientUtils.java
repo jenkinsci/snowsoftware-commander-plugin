@@ -31,7 +31,9 @@ public class ClientUtils {
 			if(response.getStatus() == Status.UNAUTHORIZED.getStatusCode()) {
 				throw new VCommanderException("Access is denied due to invalid credentials.");	
 			} else {
-				throw new VCommanderException(response.toString());
+				StringBuilder errorMessage = new StringBuilder();
+				errorMessage.append("status_code=").append(response.getStatus()).append(", error_message=").append(response.getEntity(String.class));
+				throw new VCommanderException(errorMessage.toString());
 			}
 		}
 	}
