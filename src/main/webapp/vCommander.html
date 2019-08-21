@@ -1,5 +1,5 @@
 <div>
-	<h3>This plug-in enables Jenkins to interact with Embotics vCommander.</h3>
+	<h3>This plug-in enables Jenkins to interact with Embotics Commander.</h3>
 	<div>
 		<b>It provides the following build steps:</b>
 		<div style="margin-left: 40px;">
@@ -13,8 +13,8 @@
 
 	<br/>
 	<div>
-		<b>Request New Service</b> build step enables Jenkins to request a service from Embotics vCommander.<br/>
-		To request a service (for example, a VM), enter the name of a preconfigured vCommander service and look it up. If the service is found, it's returned as a JSON payload. You may adjust the configuration parameters of the payload as required. You may also modify the default timeout and polling intervals before making the service request.<br/>
+		<b>Request New Service</b> build step enables Jenkins to request a service from Embotics Commander.<br/>
+		To request a service (for example, a VM), enter the name of a preconfigured Commander service and look it up. If the service is found, it's returned as a JSON payload. You may adjust the configuration parameters of the payload as required. You may also modify the default timeout and polling intervals before making the service request.<br/>
 		<br/>
 		This action can be executed synchronously or asynchronously.<br/>
 		If asynchronously execution is configured, a following wait build step can check the results of this step.<br/>
@@ -35,7 +35,7 @@
 
 	<br/>
 	<div>
-		<b>Wait For Service Request Completion</b> build step enables Jenkins to wait for the completion of an asynchronously-called vCommander Request.<br/>
+		<b>Wait For Service Request Completion</b> build step enables Jenkins to wait for the completion of an asynchronously-called Commander Request.<br/>
 		The environment variable VCOMMANDER_REQUESTED_SERVICE_ID created by that service request step can be used as input parameter for this wait build step.<br/>
 		<br/>
 		The build log will provide details about the service request. If the request is successful, the following environment variables are created:
@@ -49,7 +49,7 @@
 
 	<br/>
 	<div>
-		<b>Run Command Workflow</b> build step enables Jenkins to run a command workflow in vCommander.<br/>
+		<b>Run Command Workflow</b> build step enables Jenkins to run a command workflow in Commander.<br/>
 		To run a command workflow, enter the name of the workflow and target.<br/>
 		<br/>
 		This action can be executed synchronously or asynchronously.<br/>
@@ -66,7 +66,7 @@
 
 	<br/>
 	<div>
-		<b>Wait For Command Workflow Completion</b> build step enables Jenkins to wait for previous asynchronously called vCommander Run Command Workflow completion.<br/>
+		<b>Wait For Command Workflow Completion</b> build step enables Jenkins to wait for previous asynchronously called Commander Run Command Workflow completion.<br/>
 		The environment variable VCOMMANDER_WORKFLOW_TASK_ID created by the previous step can be used as input parameter for this build step.<br/>
 		<br/>
 		The build log will provide details about the command workflow.

@@ -123,7 +123,7 @@ public class VCommanderClient {
 	 */
 	public String getClientInfo() {
 		String orgInfo = StringUtils.isNotBlank(orgName) ? String.format(" - in organization: %s", orgName) : StringUtils.EMPTY;
-		return String.format("Configured vCommander is at: %s - with userName: %s%s", baseURL, userName, orgInfo);
+		return String.format("Configured Commander is at: %s - with userName: %s%s", baseURL, userName, orgInfo);
 	}
 
 	/**

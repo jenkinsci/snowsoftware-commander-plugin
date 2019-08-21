@@ -1,4 +1,4 @@
 <?jelly escape-by-default='true'?>
 <div>
-    This plug-in enables Jenkins to interact with Embotics vCommander.
+    This plug-in enables Jenkins to interact with Embotics Commander.
 </div>

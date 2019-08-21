@@ -60,7 +60,7 @@ public class VCommanderBuilder extends Builder implements SimpleBuildStep {
 	@Override
 	public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
 		listener.getLogger().println();
-		listener.getLogger().println("========== Starting vCommander build step: " + action.getDescriptor().getDisplayName() + " ==========");
+		listener.getLogger().println("========== Starting Commander build step: " + action.getDescriptor().getDisplayName() + " ==========");
 		try {
 			action.perform(run, listener);
 		} catch(Exception e) {
@@ -69,7 +69,7 @@ public class VCommanderBuilder extends Builder implements SimpleBuildStep {
 			}
 			throw e;
 		}
-		listener.getLogger().println("========== Finished vCommander build step: " + action.getDescriptor().getDisplayName() + " ==========");
+		listener.getLogger().println("========== Finished Commander build step: " + action.getDescriptor().getDisplayName() + " ==========");
 		listener.getLogger().println();
 	}
 

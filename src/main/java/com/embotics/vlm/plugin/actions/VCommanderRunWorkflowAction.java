@@ -73,7 +73,7 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 	public void perform(Run<?, ?> run, TaskListener listener) throws InterruptedException, IOException {
 		// check if user configured a workflow
 		if (StringUtils.isBlank(workflowName)) {
-			throw new VCommanderException("There is no configuration for the vCommander workflow build step.");
+			throw new VCommanderException("There is no configuration for the Commander workflow build step.");
 		}
 
 		VCommanderClient client = VCommanderConfig.getVCommanderClient();
@@ -85,7 +85,7 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 				listener.getLogger().println("Looking up command workflow with name: '" + workflowName + "'");
 				workflowDefinitionId = client.getWorkflowDefinition(workflowName);
 			} catch (JSONException e) {
-				throw new VCommanderException(e, "Error while retrieving workflow from vCommander.");
+				throw new VCommanderException(e, "Error while retrieving workflow from Commander.");
 			}
 			
 			String taskId;
@@ -96,12 +96,12 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 				
 				listener.getLogger().println("Running command workflow: '" + workflowName + "' for target: '" + resolvedTargetName + "' with type: " + resolvedTargetType);
 				taskId = client.runCommandWorkflow(workflowDefinitionId, resolvedTargetType, resolvedTargetName);
-				listener.getLogger().println("Command workflow submitted to vCommander. Task ID: " + taskId);
+				listener.getLogger().println("Command workflow submitted to Commander. Task ID: " + taskId);
 				
 				//create environment variables for the results
 				PluginUtils.addEnvVariable(run, listener, ENV_VARIABLE_WORKFLOW_TASK_ID, taskId);
 			} catch (JSONException e) {
-				throw new VCommanderException(e, "Error while running command workflow in vCommander.");
+				throw new VCommanderException(e, "Error while running command workflow in Commander.");
 			}
 
 			if(getSync()) {

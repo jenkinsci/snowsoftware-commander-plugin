@@ -90,7 +90,7 @@ public class VCommanderRequestNewServiceAction extends AbstractVCommanderAction 
 	public void perform(Run<?, ?> run, TaskListener listener) throws InterruptedException, IOException {
 		// check if user configured a service request
 		if (StringUtils.isBlank(payload)) {
-			throw new VCommanderException("There is no configuration for the vCommander service request build step.");
+			throw new VCommanderException("There is no configuration for the Commander service request build step.");
 		}
 		try {
 			new JSONObject(payload);
@@ -113,7 +113,7 @@ public class VCommanderRequestNewServiceAction extends AbstractVCommanderAction 
 				PluginUtils.addEnvVariable(run, listener, ENV_VARIABLE_REQUEST_ID, requestId.toString());
 				listener.getLogger().println("Service was succesfuly requested. RequestID: " + requestId);
 			} catch (JSONException e) {
-				throw new VCommanderException(e, "Error while requesting service request from vCommander.");
+				throw new VCommanderException(e, "Error while requesting service request from Commander.");
 			}
 	
 			if(getSync()) {
