@@ -20,7 +20,6 @@ import org.junit.Test;
 import com.embotics.vlm.plugin.AbstractVCommanderActionTest;
 import com.embotics.vlm.plugin.VCommanderBuilder;
 import com.embotics.vlm.plugin.VCommanderEnvironmentContributingAction;
-import com.embotics.vlm.plugin.actions.VCommanderRequestNewServiceAction;
 import com.embotics.vlm.rest.v30.client.model.DeployedComponentInfo;
 
 import hudson.model.FreeStyleBuild;
@@ -126,7 +125,7 @@ public class VCommanderRequestNewServiceActionTest extends AbstractVCommanderAct
         jenkins.assertBuildStatus(Result.FAILURE, build);
         
         //check log
-        jenkins.assertLogContains("There is no configuration for the vCommander service request build step.", build.get());
+        jenkins.assertLogContains("There is no configuration for the Commander service request build step.", build.get());
     }
     
     @Test

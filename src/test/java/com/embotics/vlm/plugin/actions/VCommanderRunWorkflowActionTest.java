@@ -85,7 +85,7 @@ public class VCommanderRunWorkflowActionTest extends AbstractVCommanderActionTes
         jenkins.assertBuildStatus(Result.FAILURE, build);
         
         //check log
-        jenkins.assertLogContains("There is no configuration for the vCommander workflow build step.", build.get());
+        jenkins.assertLogContains("There is no configuration for the Commander workflow build step.", build.get());
     }
     
     @Test
