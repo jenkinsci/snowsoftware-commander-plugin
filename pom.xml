@@ -9,7 +9,7 @@
     </parent>
     <groupId>io.jenkins.plugins</groupId> 
     <artifactId>embotics-vcommander</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>1.11-SNAPSHOT</version>
     
     <packaging>hpi</packaging>
     <properties>
@@ -19,7 +19,7 @@
     
     <name>Embotics Commander Plugin</name>
     <description>Embotics Commander integration plugin for Jenkins</description>
-    <url>https://wiki.jenkins-ci.org/display/JENKINS/Embotics+vCommander+Plugin</url>
+    <url>https://github.com/jenkinsci/embotics-vcommander-plugin</url>
 
     <!-- The default licence for Jenkins OSS Plugins is MIT. Substitute for the applicable one if needed. -->
     <licenses>
