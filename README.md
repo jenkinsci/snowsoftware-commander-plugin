@@ -1,6 +1,6 @@
  {jenkins-plugin-info:embotics-Commander-plugin}
 
-Embotics provides a plugin for Jenkins automation servers (Jenkins
+Snow Software provides a plugin for Jenkins automation servers (Jenkins
 version 1.651.3 or greater). The Commander Jenkins plugin allows you to
 configure a Jenkins build job to request virtual services and run
 command workflows in a Commander instance (version 7.0.0 or greater) as
@@ -25,20 +25,24 @@ test virtual machine from the previous day, submit a service request to
 deploy a new VM, and install the most recent build of your software on
 the new VM.
 
-Embotics Commander multi-cloud management platform is the fastest and
+Snow Commander multi-cloud management platform is the fastest and
 easiest way to automate provisioning, enforce governance, and enable
 self-service IT across virtualized, private and public cloud
 infrastructures.
 
 <https://www.embotics.com/>
 
-2019 Embotics Corporation
+2020 Snow Software
 
-Multi-cloud Management Platform \| Embotics Commander
+Multi-cloud Management Platform \| Snow Commander
 
   
 
 ### Version History
+
+#### Version 2.0 (Mar 12, 2020)
+
+-	Rebranding to Snow Software
 
 #### Version 1.9 (Nov 20, 2019)
 

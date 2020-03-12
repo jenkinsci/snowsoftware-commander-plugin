@@ -17,8 +17,8 @@
         <jenkins.version>1.651.3</jenkins.version>
     </properties>
     
-    <name>Embotics Commander Plugin</name>
-    <description>Embotics Commander integration plugin for Jenkins</description>
+    <name>Snow Commander Plugin</name>
+    <description>Snow Commander integration plugin for Jenkins</description>
     <url>https://github.com/jenkinsci/embotics-vcommander-plugin</url>
 
     <!-- The default licence for Jenkins OSS Plugins is MIT. Substitute for the applicable one if needed. -->
