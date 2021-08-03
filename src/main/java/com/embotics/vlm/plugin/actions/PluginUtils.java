@@ -3,6 +3,7 @@ package com.embotics.vlm.plugin.actions;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import com.embotics.vlm.plugin.VCommanderActionRunEnvironmentVariables;
 import com.embotics.vlm.plugin.VCommanderEnvironmentContributingAction;
 
 import hudson.Util;
@@ -19,7 +20,7 @@ public class PluginUtils {
 	
 	/**
 	 *	Adds a new environment variable to the jenkins build context
-	 *	The scope of the varibale is the current run only. 
+	 *	The scope of the variable is the current run only. 
 	 *
 	 * @param run		context run
 	 * @param listener	context listener
@@ -28,13 +29,20 @@ public class PluginUtils {
 	 */
 	static void addEnvVariable(Run<?, ?> run, TaskListener listener, String key, String value) {
 		listener.getLogger().println("Adding new environment variable: " + key + "=" + value);
-
+		
 		VCommanderEnvironmentContributingAction contributorAction = run.getAction(VCommanderEnvironmentContributingAction.class);
 		if (contributorAction == null) {
 			contributorAction = new VCommanderEnvironmentContributingAction();
 			run.addAction(contributorAction);
 		}
 		contributorAction.add(key, value);
+		
+		VCommanderActionRunEnvironmentVariables runVariables = run.getAction(VCommanderActionRunEnvironmentVariables.class);
+		if (runVariables == null) {
+			runVariables = new VCommanderActionRunEnvironmentVariables();
+			run.addAction(runVariables);
+		}
+		runVariables.add(key, value);
 	}
 	
 	static boolean isNumericOrVariable(String value) {

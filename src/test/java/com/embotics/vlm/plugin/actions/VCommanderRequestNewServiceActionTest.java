@@ -18,6 +18,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.embotics.vlm.plugin.AbstractVCommanderActionTest;
+import com.embotics.vlm.plugin.VCommanderActionRunEnvironmentVariables;
 import com.embotics.vlm.plugin.VCommanderBuilder;
 import com.embotics.vlm.plugin.VCommanderEnvironmentContributingAction;
 import com.embotics.vlm.rest.v30.client.model.DeployedComponentInfo;
@@ -112,6 +113,21 @@ public class VCommanderRequestNewServiceActionTest extends AbstractVCommanderAct
 	        Assert.assertEquals("2nd Component Type environment variable not mathing", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
 
         }
+        
+        // Check variables for pipeline mode. These are handled differently.
+        VCommanderActionRunEnvironmentVariables envVars = build.getAction(VCommanderActionRunEnvironmentVariables.class);
+        if (sync) {
+        	Assert.assertEquals("1st Component Name environment variable not mathing", "componentName1", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
+            Assert.assertEquals("1st Component Type environment variable not mathing", "componentType1", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
+            Assert.assertEquals("2nd Component Name environment variable not mathing", "componentName2", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
+	        Assert.assertEquals("2nd Component Type environment variable not mathing", "componentType2", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
+        } else {
+        	Assert.assertEquals("1st Component Name environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
+	        Assert.assertEquals("1st Component Type environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
+	        Assert.assertEquals("2nd Component Name environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
+	        Assert.assertEquals("2nd Component Type environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
+        }
+        
     }
     
     @Test
