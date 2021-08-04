@@ -30,6 +30,7 @@ public class PluginUtils {
 	static void addEnvVariable(Run<?, ?> run, TaskListener listener, String key, String value) {
 		listener.getLogger().println("Adding new environment variable: " + key + "=" + value);
 		
+		// For FreeStyle projects we can use a ContributorAction class to manage environmental variables. This does not work for Pipeline projects.
 		VCommanderEnvironmentContributingAction contributorAction = run.getAction(VCommanderEnvironmentContributingAction.class);
 		if (contributorAction == null) {
 			contributorAction = new VCommanderEnvironmentContributingAction();
@@ -37,6 +38,9 @@ public class PluginUtils {
 		}
 		contributorAction.add(key, value);
 		
+		// For Pipeline projects, we must use a base action to manage the environmental variables. The action is just a simple class
+		// that can maintain the environmental variables internally and then pass them to the actual environmental variables at the
+		// appropriate time.
 		VCommanderActionRunEnvironmentVariables runVariables = run.getAction(VCommanderActionRunEnvironmentVariables.class);
 		if (runVariables == null) {
 			runVariables = new VCommanderActionRunEnvironmentVariables();
