@@ -94,38 +94,38 @@ public class VCommanderRequestNewServiceActionTest extends AbstractVCommanderAct
         if(sync) {
 	        jenkins.assertLogContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME=componentName1", build);
 	        jenkins.assertLogContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE=componentType1", build);
-	        Assert.assertEquals("1st Component Name environment variable not mathing", "componentName1", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
-	        Assert.assertEquals("1st Component Type environment variable not mathing", "componentType1", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
+	        Assert.assertEquals("1st Component Name environment variable not matching", "componentName1", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
+	        Assert.assertEquals("1st Component Type environment variable not matching", "componentType1", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
 	        
 	        jenkins.assertLogContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME=componentName2", build);
 	        jenkins.assertLogContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE=componentType2", build);
-	        Assert.assertEquals("2nd Component Name environment variable not mathing", "componentName2", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
-	        Assert.assertEquals("2nd Component Type environment variable not mathing", "componentType2", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
+	        Assert.assertEquals("2nd Component Name environment variable not matching", "componentName2", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
+	        Assert.assertEquals("2nd Component Type environment variable not matching", "componentType2", envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
         } else {
 	        jenkins.assertLogNotContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME=componentName1", build);
 	        jenkins.assertLogNotContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE=componentType1", build);
-	        Assert.assertEquals("1st Component Name environment variable not mathing", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
-	        Assert.assertEquals("1st Component Type environment variable not mathing", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
+	        Assert.assertEquals("1st Component Name environment variable not matching", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
+	        Assert.assertEquals("1st Component Type environment variable not matching", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
 	        
 	        jenkins.assertLogNotContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME=componentName2", build);
 	        jenkins.assertLogNotContains("Adding new environment variable: VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE=componentType2", build);
-	        Assert.assertEquals("2nd Component Name environment variable not mathing", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
-	        Assert.assertEquals("2nd Component Type environment variable not mathing", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
+	        Assert.assertEquals("2nd Component Name environment variable not matching", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
+	        Assert.assertEquals("2nd Component Type environment variable not matching", null, envAction.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
 
         }
         
         // Check variables for pipeline mode. These are handled differently.
         VCommanderActionRunEnvironmentVariables envVars = build.getAction(VCommanderActionRunEnvironmentVariables.class);
         if (sync) {
-        	Assert.assertEquals("1st Component Name environment variable not mathing", "componentName1", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
-            Assert.assertEquals("1st Component Type environment variable not mathing", "componentType1", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
-            Assert.assertEquals("2nd Component Name environment variable not mathing", "componentName2", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
-	        Assert.assertEquals("2nd Component Type environment variable not mathing", "componentType2", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
+        	Assert.assertEquals("1st Component Name environment variable not matching", "componentName1", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
+            Assert.assertEquals("1st Component Type environment variable not matching", "componentType1", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
+            Assert.assertEquals("2nd Component Name environment variable not matching", "componentName2", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
+	        Assert.assertEquals("2nd Component Type environment variable not matching", "componentType2", envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
         } else {
-        	Assert.assertEquals("1st Component Name environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
-	        Assert.assertEquals("1st Component Type environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
-	        Assert.assertEquals("2nd Component Name environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
-	        Assert.assertEquals("2nd Component Type environment variable not mathing", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
+        	Assert.assertEquals("1st Component Name environment variable not matching", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_NAME"));
+	        Assert.assertEquals("1st Component Type environment variable not matching", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT1_TYPE"));
+	        Assert.assertEquals("2nd Component Name environment variable not matching", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_NAME"));
+	        Assert.assertEquals("2nd Component Type environment variable not matching", null, envVars.getEnvValue("VCOMMANDER_REQUESTED_SERVICE1_COMPONENT2_TYPE"));
         }
         
     }
