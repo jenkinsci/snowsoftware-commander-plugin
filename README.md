@@ -1,4 +1,4 @@
- {jenkins-plugin-info:embotics-Commander-plugin}
+# [Snow Software Commander](https://www.snowsoftware.com/products/snow-commander) Jenkins plugin
 
 Snow Software provides a plugin for Jenkins automation servers (Jenkins
 version 1.651.3 or greater). The Commander Jenkins plugin allows you to
@@ -30,8 +30,6 @@ easiest way to automate provisioning, enforce governance, and enable
 self-service IT across virtualized, private and public cloud
 infrastructures.
 
-<https://www.embotics.com/>
-
 2020 Snow Software
 
 Multi-cloud Management Platform \| Snow Commander
@@ -40,7 +38,11 @@ Multi-cloud Management Platform \| Snow Commander
 
 ### Version History
 
-#### Version 2.0 (Mar 12, 2020)
+#### Version 1.12 (Aug 5, 2021)
+
+-	Bugfix: Environment variables are now saved correctly in Jenkins pipelines
+
+#### Version 1.11 (Mar 12, 2020)
 
 -	Rebranding to Snow Software
 
