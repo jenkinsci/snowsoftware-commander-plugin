@@ -40,6 +40,10 @@ Multi-cloud Management Platform \| Snow Commander
 
 ### Version History
 
+#### Version 2.1 (Aug 5, 2021)
+
+-	FIX: Environment variables are now saved correctly in Jenkins pipeline
+
 #### Version 2.0 (Mar 12, 2020)
 
 -	Rebranding to Snow Software
