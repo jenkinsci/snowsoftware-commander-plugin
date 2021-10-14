@@ -16,6 +16,7 @@ import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.ws.rs.POST;
 
 import javax.servlet.ServletException;
 
@@ -185,7 +186,9 @@ public final class VCommanderConfig extends GlobalConfiguration {
 	/**
 	 * Called by jelly, to validate address field
 	 */
+	@POST
 	public FormValidation doCheckAddress(@QueryParameter String value) throws IOException, ServletException {
+		Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 		if (value.length() == 0)
 			return FormValidation.error(Messages.VCommanderConfig_errors_missingAddress());
 
@@ -195,6 +198,7 @@ public final class VCommanderConfig extends GlobalConfiguration {
 	/**
 	 * Called by jelly, to validate credential field
 	 */
+	@POST
 	public FormValidation doCheckCredentialsId(@AncestorInPath Item item, @QueryParameter String address, @QueryParameter String credentialsId) {
 		// Return no-op validation results for users that do not have permission to list
 		// credentials
@@ -226,11 +230,12 @@ public final class VCommanderConfig extends GlobalConfiguration {
 	/**
 	 * Called by jelly, to validate credentials
 	 */
+	@POST
 	public FormValidation doTestConnection(	@QueryParameter("address") final String address, 
 											@QueryParameter("credentialsId") final String credentialsId,
 											@QueryParameter("orgName") final String orgName)
 											throws IOException, ServletException {
-		
+		Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 		// Fail when no credentials
 		if (StringUtils.isBlank(credentialsId)) {
 			return FormValidation.error(Messages.VCommanderConfig_errors_missingCredential());

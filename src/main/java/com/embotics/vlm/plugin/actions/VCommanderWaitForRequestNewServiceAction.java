@@ -14,6 +14,7 @@ package com.embotics.vlm.plugin.actions;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.ws.rs.POST;
 
 import org.apache.commons.lang.StringUtils;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -31,6 +32,7 @@ import hudson.model.Descriptor;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.util.FormValidation;
+import jenkins.model.Jenkins;
 
 /**
  * A vCommander Action, which should be used in pair with VCommanderRequestNewServiceAction
@@ -110,7 +112,9 @@ public class VCommanderWaitForRequestNewServiceAction extends AbstractVCommander
 		/**
 		 * Called by jelly, to validate requestId field
 		 */
+		@POST
 		public FormValidation doCheckRequestId(@QueryParameter String requestId) throws IOException, ServletException {
+			Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 			if(PluginUtils.isNumericOrVariable(requestId)) {
 				return FormValidation.ok();
 			} else {

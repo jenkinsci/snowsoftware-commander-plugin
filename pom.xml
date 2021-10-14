@@ -4,17 +4,18 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>2.33</version>
+        <version>4.0</version>
         <relativePath />
     </parent>
     <groupId>io.jenkins.plugins</groupId> 
-    <artifactId>embotics-vcommander</artifactId>
+    <artifactId>snowsoftware-commander</artifactId>
     <version>1.12-SNAPSHOT</version>
     
     <packaging>hpi</packaging>
     <properties>
         <!-- Baseline Jenkins version you use to build the plugin. Users must have this version or newer to run. -->
-        <jenkins.version>1.651.3</jenkins.version>
+        <jenkins.version>2.164.3</jenkins.version>
+        <java.level>8</java.level>
     </properties>
     
     <name>Snow Commander Plugin</name>
