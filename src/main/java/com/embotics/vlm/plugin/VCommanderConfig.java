@@ -186,7 +186,9 @@ public final class VCommanderConfig extends GlobalConfiguration {
 	/**
 	 * Called by jelly, to validate address field
 	 */
+	@POST
 	public FormValidation doCheckAddress(@QueryParameter String value) throws IOException, ServletException {
+		Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 		if (value.length() == 0)
 			return FormValidation.error(Messages.VCommanderConfig_errors_missingAddress());
 
@@ -196,6 +198,7 @@ public final class VCommanderConfig extends GlobalConfiguration {
 	/**
 	 * Called by jelly, to validate credential field
 	 */
+	@POST
 	public FormValidation doCheckCredentialsId(@AncestorInPath Item item, @QueryParameter String address, @QueryParameter String credentialsId) {
 		// Return no-op validation results for users that do not have permission to list
 		// credentials

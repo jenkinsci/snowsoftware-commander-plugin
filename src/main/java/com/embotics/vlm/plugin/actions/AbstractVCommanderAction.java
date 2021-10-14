@@ -3,6 +3,7 @@ package com.embotics.vlm.plugin.actions;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.ws.rs.POST;
 
 import org.kohsuke.stapler.QueryParameter;
 
@@ -11,6 +12,7 @@ import com.embotics.vlm.plugin.VCommanderAction;
 
 import hudson.model.Descriptor;
 import hudson.util.FormValidation;
+import jenkins.model.Jenkins;
 
 /**
  * A base class to be extended by the vCommadner actions.
@@ -60,7 +62,9 @@ public abstract class AbstractVCommanderAction implements VCommanderAction {
 		/**
 		 * Called by jelly, to validate timeout field
 		 */
+		@POST
 		public FormValidation doCheckTimeout(@QueryParameter Long value) throws IOException, ServletException {
+			Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 			if (value == null || value < MINIMUM_TIMEOUT_VALUE) {
 				return FormValidation.error(Messages.VCommanderBuilder_errors_missingTimeout());
 			}
@@ -71,7 +75,9 @@ public abstract class AbstractVCommanderAction implements VCommanderAction {
 		/**
 		 * Called by jelly, to validate polling field
 		 */
+		@POST
 		public FormValidation doCheckPolling(@QueryParameter Long polling, @QueryParameter Long timeout) throws IOException, ServletException {
+			Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 			if (polling == null ||polling < MINIMUM_POLLING_VALUE) {
 				return FormValidation.error(Messages.VCommanderBuilder_errors_missingPolling());
 			}

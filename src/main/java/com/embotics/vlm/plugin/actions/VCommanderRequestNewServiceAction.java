@@ -14,6 +14,7 @@ package com.embotics.vlm.plugin.actions;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.util.List;
+import javax.ws.rs.POST;
 
 import javax.servlet.ServletException;
 
@@ -37,6 +38,7 @@ import hudson.model.Descriptor;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.util.FormValidation;
+import jenkins.model.Jenkins;
 
 /**
  * A vCommander Action, which submits a new service request
@@ -192,7 +194,9 @@ public class VCommanderRequestNewServiceAction extends AbstractVCommanderAction 
 		/**
 		 * Called by jelly, to validate payload field
 		 */
+		@POST
 		public FormValidation doCheckPayload(@QueryParameter String payload) throws IOException, ServletException {
+			Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 			// if no content, do not return error;
 			// we do not want to show the initial form with error
 			if (StringUtils.isBlank(payload)) {

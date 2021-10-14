@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 
 import javax.servlet.ServletException;
+import javax.ws.rs.POST;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONException;
@@ -35,6 +36,7 @@ import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.util.ComboBoxModel;
 import hudson.util.FormValidation;
+import jenkins.model.Jenkins;
 
 /**
  * A vCommander Action, which triggers a command workflow
@@ -156,7 +158,9 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 		/**
 		 * Called by jelly, to validate targetType field
 		 */
+		@POST
 		public FormValidation doCheckTargetType(@QueryParameter String targetType) throws IOException, ServletException {
+			Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 			// if no content, do not return error;
 			// we do not want to show the initial form with error
 			if (StringUtils.isBlank(targetType)) {
@@ -173,7 +177,9 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 		/**
 		 * Called by jelly, to validate targetName field
 		 */
+		@POST
 		public FormValidation doCheckTargetName(@QueryParameter String targetType, @QueryParameter String targetName) throws IOException, ServletException {
+			Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 			// if no content, do not return error;
 			// we do not want to show the initial form with error
 			if (StringUtils.isBlank(targetName)) {
@@ -190,7 +196,9 @@ public class VCommanderRunWorkflowAction extends AbstractVCommanderAction {
 		/**
 		 * Called by jelly, to validate workflowName field
 		 */
+		@POST
 		public FormValidation doCheckWorkflowName(@QueryParameter String targetType, @QueryParameter String workflowName) throws IOException, ServletException {
+			Jenkins.getInstance().checkPermission(Jenkins.ADMINISTER);
 			// if no content, do not return error;
 			// we do not want to show the initial form with error
 			if (StringUtils.isBlank(workflowName)) {
