@@ -2,8 +2,8 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 
 	<f:block>
-		<img src="${resURL}/plugin/embotics-vcommander/images/vcommander-logo.svg" style="height:50px" />
-		<f:helpLink url="/plugin/embotics-vcommander/vCommander.html" />
+		<img src="${resURL}/plugin/snowsoftware-commander/images/snowsoftware-commander-logo.svg" style="height:50px" />
+		<f:helpLink url="/plugin/snowsoftware-commander/Snow Commander.html" />
 		<f:helpArea />
 	</f:block>
 	
