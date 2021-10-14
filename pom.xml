@@ -8,7 +8,7 @@
         <relativePath />
     </parent>
     <groupId>io.jenkins.plugins</groupId> 
-    <artifactId>embotics-vcommander</artifactId>
+    <artifactId>snowsoftware-commander</artifactId>
     <version>1.12-SNAPSHOT</version>
     
     <packaging>hpi</packaging>
