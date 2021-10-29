@@ -8,8 +8,8 @@
         <relativePath />
     </parent>
     <groupId>io.jenkins.plugins</groupId> 
-    <artifactId>snowsoftware-commander</artifactId>
-    <version>1.12-SNAPSHOT</version>
+    <artifactId>embotics-vcommander</artifactId>
+    <version>2.0</version>
     
     <packaging>hpi</packaging>
     <properties>
@@ -20,7 +20,7 @@
     
     <name>Snow Commander Plugin</name>
     <description>Snow Commander integration plugin for Jenkins</description>
-    <url>https://github.com/jenkinsci/embotics-vcommander-plugin</url>
+    <url>https://github.com/jenkinsci/snowsoftware-commander-plugin</url>
 
     <!-- The default licence for Jenkins OSS Plugins is MIT. Substitute for the applicable one if needed. -->
     <licenses>
@@ -66,9 +66,9 @@
 
 
     <scm>
-        <connection>scm:git:git://github.com/jenkinsci/embotics-vcommander-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jenkinsci/embotics-vcommander-plugin.git</developerConnection>
-        <url>https://github.com/jenkinsci/embotics-vcommander-plugin</url>
+        <connection>scm:git:git://github.com/jenkinsci/snowsoftware-commander-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jenkinsci/snowsoftware-commander-plugin.git</developerConnection>
+        <url>https://github.com/jenkinsci/snowsoftware-commander-plugin</url>
       <tag>HEAD</tag>
   </scm>
     <repositories>
