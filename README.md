@@ -1,18 +1,17 @@
 # [Snow Software Commander](https://www.snowsoftware.com/products/snow-commander) Jenkins plugin
 
 Snow Software provides a plugin for Jenkins automation servers (Jenkins
-version 1.651.3 or greater). The Commander Jenkins plugin allows you to
+version 2.164.3 or greater). The Commander Jenkins plugin allows you to
 configure a Jenkins build job to request virtual services and run
 command workflows in a Commander instance (version 7.0.0 or greater) as
 part of building, deploying and installing a project.
 
 Using the Commander Jenkins plugin, you can add any of the following
-build steps to freestyle projects:
+build steps to freestyle and Pipeline jobs:
 
--   request virtual services
--   run command workflows
--   wait steps to ensure that requests or workflows have sufficient time
-    to complete
+- request virtual services
+- run command workflows
+- wait steps to ensure that requests or workflows have sufficient time to complete
 
 The Commander plugin enables more effective continuous integration and
 delivery for improved DevOps capabilities. Using the Commander plugin
@@ -30,55 +29,37 @@ easiest way to automate provisioning, enforce governance, and enable
 self-service IT across virtualized, private and public cloud
 infrastructures.
 
-2020 Snow Software
+2021 Snow Software
 
 Multi-cloud Management Platform \| Snow Commander
 
   
 
-### Version History
-
-#### Version 1.12 (Aug 5, 2021)
-
+## Version History
+### Version 2.0 (Nov 1, 2021)
+- Version bump after plugin rename on JenkinsCI repository
+### Version 1.12 (Aug 5, 2021)
 -	Bugfix: Environment variables are now saved correctly in Jenkins pipelines
-
-#### Version 1.11 (Mar 12, 2020)
-
+### Version 1.11 (Mar 12, 2020)
 -	Rebranding to Snow Software
-
-#### Version 1.9 (Nov 20, 2019)
-
+### Version 1.9 (Nov 20, 2019)
 -   Bugfixes and rebranding from vCommander to Commander
-
-#### Version 1.8 (Jan 11, 2019)
-
+### Version 1.8 (Jan 11, 2019)
 -   Bugfix: rest v.3 bugfix for error passthrough
-
-#### Version 1.7 (Sept 28, 2018)
-
+### Version 1.7 (Sept 28, 2018)
 -   Bugfix: fixed typo in the help for 'wait for service request
     completion'
-
-#### Version 1.6 (July 26, 2018)
-
+### Version 1.6 (July 26, 2018)
 -   Bugfix: removed port number from help example as it's not needed
     anymore
-
-#### Version 1.5 (July 25, 2018)
-
+### Version 1.5 (July 25, 2018)
 -   Added new Embotics logo to plugin
-
-#### Version 1.4 (May 29th, 2018)
-
+### Version 1.4 (May 29th, 2018)
 -   fixed issue with wiki link in pom.xml
 -   readme spacing
-
-#### Version 1.3 (May 29th, 2018)
-
+### Version 1.3 (May 29th, 2018)
 -   testing an automated release cycle with an internal version of
     jenkins and maven
-
-#### Version 1.2 (May 28th, 2018) - Initial production release
-
+### Version 1.2 (May 28th, 2018) - Initial production release
 -   first stable release of Embotics' Commander Plugin for Jenkins
 -   compatible with all versions of Commander 7.0 GA +
